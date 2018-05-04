@@ -1,0 +1,96 @@
+# Structs vs Classes (Value Type vs Reference Type)
+
+Why use a Struct (Value Type_) over a Class (Reference Type)?
+- Passing copies is safer than passing pointers
+- Passing copies is more thread safe than pointers
+- Immutability (reduces risk of value changing underneath you)
+- Structs don't have inheritance, they can only conform to protocols
+- Classes can inherit from multiple superclasses, therefore creating a complex heirarchy of inheritance, 
+that can be hard to manage or be a code smell for hard to discover bugs.
+
+https://stackoverflow.com/questions/24232799/why-choose-struct-over-class/24232845#24232845
+
+# Integers (Unsigned, vs Signed)
+
+Signed Integers (Positive, Negative or Zero)
+Unsigned (Positive or Zero)
+
+// Int is a type that uses the current size of the platform in which the code is being run, for signed Integers.
+// If code is run in a 32bit environment, it uses Int32, if 64bit environment, uses Int64.
+
+// UInt is the same as Int, but uses the Unsigned type for the platform in which the code is being run.
+// If code is run in a 32bit environment, it uses UInt32, if 64bit environment, uses UInt64.
+
+# Floating Point Numbers
+
+- Numbers with a fractional component (decimal place).
+- i.e 3.14158 or 0.1 or -273.15.
+
+Double is a 64bit floating point number. (15 decimal place precision)
+Float is a 32bit floating point number. (6 decimal place precision)
+
+Floating point numbers can contain underscores or be padded with extra zeros, to help with readability, 
+neither will effect the underlying value.
+
+i.e. writing one thousand as 1_000, or one as 0001.
+
+# Operators
+
+Unary - operators which are performed on a single value
+Binary - operators which are performed on two values
+Infix - appear in the middle of two values
+Ternary - operators which are performed on three values (Swift only has one the A ? B : C operator)
+
+# Sets
+
+- A set is a collection that doesn't maintain any specific order. Each element in a Set can only exist once (distinct).
+- Each type in a set must be Hashable i.e. be able to generate a hash from itself.
+- Swift's foundation types Int, String, Bool are all Hashable by default.
+- Initialize a Set by using the syntax `Set<Element>`
+
+# permutations - means different instances or options of a given thing or type
+
+# Control Transfer Statements
+
+## Continue
+
+- Tells a loop to stop what it is doing and start again at the beginning of the next iteration of the loop.
+- "I am done with the current iteration" without leaving the loop altogether.
+
+## Break
+
+- Stops the execution of an entire control flow statement (switch or loop) immediately.
+- In a loop, the loop will stop and execution will move to the code directly after the loop.
+
+## Fallthrough
+
+- Swift switch statements don't fallthrough by default, that is after the first case is matched, the switch statement is finished.
+- You can choose to fallthrough on a case by case basis.
+
+# Custom Operators
+
+- Operator overloading means defining your own implementation of an existing operator but specific to your type.
+- For example overloading the '+' operator on the Version type, in order to enable adding two Versions together (Version([1,1,1]) + Version([1,0,0])).
+
+- Define or overload an operator with the syntax:
+
+```
+static func + (lhs: Value, rhs: Value) -> Bool {
+	// implementation
+	return true
+}
+```
+
+- Define a binary operator the same way, with just one parameter. You can specific if it is infix or postfix using the `infix` `postfix` keywords,
+before the function signature such as:
+
+```
+static prefix func - (version: Version) {
+	// do some stuff
+}
+```
+
+## Equivalence Operators
+
+- To add equivalence to your type, conform to the `Equatable` protocol and define an overload for `==`.
+
